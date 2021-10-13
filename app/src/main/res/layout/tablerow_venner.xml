@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:theme="@style/TableRowElement">
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_person_24"
+            tools:ignore="ContentDescription" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/kontaktID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="0sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/navn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TESTTEST"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/telefon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TESTTEST" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/vennSlettBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_background"
+            android:onClick="slettKontakt"
+            app:icon="@drawable/ic_baseline_delete_forever_24"
+            tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/vennRedigerBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_background"
+            android:onClick="redigerKontakt"
+            app:icon="@drawable/ic_baseline_edit_24"
+            tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+
+</TableRow>

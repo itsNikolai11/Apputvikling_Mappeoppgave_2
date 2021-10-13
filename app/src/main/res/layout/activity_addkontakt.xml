@@ -15,9 +15,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/fornavnInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/fornavnInput"
         android:layout_width="258dp"
@@ -60,23 +61,26 @@
         app:layout_constraintTop_toBottomOf="@+id/etternavnInput" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="116dp"
-        android:layout_height="59dp"
-        android:layout_marginEnd="76dp"
+        android:id="@+id/lagreVenn"
+        android:layout_width="128dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="52dp"
         android:layout_marginBottom="50dp"
-        android:text="Button"
+        android:onClick="saveKontakt"
+        android:text="Lagre"
+        app:icon="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="116dp"
-        android:layout_height="59dp"
+        android:id="@+id/avbrytBtn"
+        android:layout_width="128dp"
+        android:layout_height="65dp"
         android:layout_marginBottom="50dp"
-        android:text="Button"
+        android:text="Avbryt"
+        app:icon="@drawable/ic_baseline_cancel_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/lagreVenn"
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent" />
 

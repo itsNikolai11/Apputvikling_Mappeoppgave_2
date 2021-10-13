@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/drawable/btn_background.xml" value="0.3828125" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/drawable/tablerow_bg.xml" value="0.3828125" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_addkontakt.xml" value="0.27445652173913043" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_kontakter.xml" value="0.27445652173913043" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_main.xml" value="0.27445652173913043" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/tablerow_venner.xml" value="0.27445652173913043" />
       </map>
     </option>
   </component>

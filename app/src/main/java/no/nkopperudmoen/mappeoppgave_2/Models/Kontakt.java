@@ -23,6 +23,14 @@ public class Kontakt {
 
     }
 
+    public Long get_ID() {
+        return _ID;
+    }
+
+    public void set_ID(Long _ID) {
+        this._ID = _ID;
+    }
+
     public String getFornavn() {
         return fornavn;
     }

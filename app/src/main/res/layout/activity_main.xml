@@ -6,13 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <Button
+        android:id="@+id/bestillingNavBtn"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
+        android:onClick="visBestillinger"
+        android:text="Bestillinger"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintBottom_toTopOf="@id/vennerNavBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/vennerNavBtn"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:onClick="visVenner"
+        android:text="Venner"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_baseline_person_24"
+        app:layout_constraintBottom_toTopOf="@id/prefsNavBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bestillingNavBtn" />
+
+    <Button
+        android:id="@+id/prefsNavBtn"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:onClick="visPreferanser"
+        android:text="Preferanser"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_baseline_settings_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vennerNavBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

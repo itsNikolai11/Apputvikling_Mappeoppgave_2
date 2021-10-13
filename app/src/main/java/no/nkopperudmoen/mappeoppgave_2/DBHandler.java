@@ -2,10 +2,12 @@ package no.nkopperudmoen.mappeoppgave_2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import no.nkopperudmoen.mappeoppgave_2.Models.Bestilling;
 import no.nkopperudmoen.mappeoppgave_2.Models.Kontakt;
@@ -104,8 +106,21 @@ public class DBHandler extends SQLiteOpenHelper {
     Hent-metoder
      */
     public ArrayList<Kontakt> hentKontakter() {
-
-        return null;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String select = "SELECT * FROM " + TABLE_KONTAKTER;
+        Cursor c = db.rawQuery(select, null);
+        ArrayList<Kontakt> kontakter = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                Kontakt k = new Kontakt();
+                k.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+                k.setFornavn(c.getString((c.getColumnIndex(KEY_FORNAVN))));
+                k.setEtternavn(c.getString((c.getColumnIndex(KEY_ETTERNAVN))));
+                k.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
+                kontakter.add(k);
+            } while (c.moveToNext());
+        }
+        return kontakter;
     }
 
     public ArrayList<Bestilling> hentBestillinger() {
@@ -143,7 +158,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public int endreBestilling(Bestilling b) {
         return 0;
     }
+
     /*
     Slett-metoder
      */
+    public void slettKontakt(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "DELETE * FROM " + TABLE_KONTAKTER + " WHERE " + KEY_ID + " LIKE " + id;
+        db.execSQL(sql);
+    }
 }
