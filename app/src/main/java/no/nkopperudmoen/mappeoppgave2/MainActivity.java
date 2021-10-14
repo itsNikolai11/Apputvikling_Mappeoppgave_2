@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2;
+package no.nkopperudmoen.mappeoppgave2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,5 +24,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void visPreferanser(View view) {
+    }
+
+    public void visRestauranter(View view) {
+        Intent i = new Intent(this, RestauranterActivity.class);
+        startActivity(i);
     }
 }

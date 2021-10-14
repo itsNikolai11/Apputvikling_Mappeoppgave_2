@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2;
+package no.nkopperudmoen.mappeoppgave2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import no.nkopperudmoen.mappeoppgave_2.Models.Bestilling;
-import no.nkopperudmoen.mappeoppgave_2.Models.Kontakt;
-import no.nkopperudmoen.mappeoppgave_2.Models.Restaurant;
+import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
+import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
+import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class DBHandler extends SQLiteOpenHelper {
     //Databasenavn og versjon
@@ -95,10 +94,18 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void leggTilRestaurant(Restaurant r) {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAVN, r.getNavn());
+        values.put(KEY_TELEFON, r.getTelefon());
+        values.put(KEY_ADRESSE, r.getAdresse());
+        values.put(KEY_POSTNR, r.getPostNr());
+        values.put(KEY_TYPE, r.getType());
+        db.insert(TABLE_RESTAURANTER, null, values);
     }
 
     public void lagreBestilling(Bestilling b) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
     }
 
@@ -124,23 +131,44 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public ArrayList<Bestilling> hentBestillinger() {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         return null;
     }
 
     public ArrayList<Restaurant> hentRestauranter() {
-        return null;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String select = "SELECT * FROM " + TABLE_RESTAURANTER;
+        ArrayList<Restaurant> restauranter = new ArrayList<>();
+        Cursor c = db.rawQuery(select, null);
+        if (c.moveToFirst()) {
+            do {
+                Restaurant r = new Restaurant();
+                r.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+                r.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
+                r.setNavn(c.getString((c.getColumnIndex(KEY_NAVN))));
+                r.setAdresse(c.getString((c.getColumnIndex(KEY_ADRESSE))));
+                r.setPostNr(c.getInt((c.getColumnIndex(KEY_POSTNR))));
+                r.setType(c.getString((c.getColumnIndex(KEY_TYPE))));
+                restauranter.add(r);
+            } while (c.moveToNext());
+        }
+        return restauranter;
     }
 
     public Kontakt hentKontakt(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
         return null;
     }
 
     public Restaurant hentRestaurant(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
         return null;
     }
 
     public Bestilling hentBestilling(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
         return null;
     }
 
@@ -148,23 +176,25 @@ public class DBHandler extends SQLiteOpenHelper {
     Endre-metoder
      */
     public int endreKontakt(Kontakt k) {
+        SQLiteDatabase db = this.getWritableDatabase();
         return 0;
     }
 
     public int endreRestaurant(Restaurant r) {
+        SQLiteDatabase db = this.getWritableDatabase();
         return 0;
     }
 
     public int endreBestilling(Bestilling b) {
+        SQLiteDatabase db = this.getWritableDatabase();
         return 0;
     }
 
     /*
     Slett-metoder
      */
-    public void slettKontakt(int id) {
+    public void slettKontakt(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "DELETE * FROM " + TABLE_KONTAKTER + " WHERE " + KEY_ID + " LIKE " + id;
-        db.execSQL(sql);
+        db.delete(TABLE_KONTAKTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
 }

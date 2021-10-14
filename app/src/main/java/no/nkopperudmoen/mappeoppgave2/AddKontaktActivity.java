@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2;
+package no.nkopperudmoen.mappeoppgave2;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import no.nkopperudmoen.mappeoppgave_2.Models.Kontakt;
+import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 
 public class AddKontaktActivity extends AppCompatActivity {
     DBHandler db;

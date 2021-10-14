@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2;
+package no.nkopperudmoen.mappeoppgave2;
 
 import android.content.Context;
 

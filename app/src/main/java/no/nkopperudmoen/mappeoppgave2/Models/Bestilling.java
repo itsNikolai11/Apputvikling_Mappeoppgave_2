@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2.Models;
+package no.nkopperudmoen.mappeoppgave2.Models;
 
 import java.util.ArrayList;
 import java.util.Date;

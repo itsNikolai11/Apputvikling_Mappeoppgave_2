@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave_2.Models;
+package no.nkopperudmoen.mappeoppgave2.Models;
 
 public class Poststed {
     int postNr;
