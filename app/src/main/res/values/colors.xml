@@ -11,4 +11,5 @@
     <color name="primaryElementBG">#8A1A0C</color>
     <color name="primaryElementVariant">#FF5B45</color>
     <color name="positive">#008A46</color>
+    <color name="backgroundLighter">#666666</color>
 </resources>

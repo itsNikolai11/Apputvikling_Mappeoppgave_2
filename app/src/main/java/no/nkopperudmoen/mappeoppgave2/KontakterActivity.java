@@ -56,12 +56,13 @@ public class KontakterActivity extends AppCompatActivity {
             tv.setText(tlf);
             btn = tr.findViewById(R.id.vennSlettBtn);
             String finalId = id;
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final Long lID = Long.parseLong(finalId);
-                    slettKontakt(lID);
-                }
+            btn.setOnClickListener(view -> {
+                final Long lID = Long.parseLong(finalId);
+                slettKontakt(lID);
+            });
+            btn = tr.findViewById(R.id.vennRedigerBtn);
+            btn.setOnClickListener(view -> {
+
             });
             tl.addView(tr);
         }
@@ -78,7 +79,6 @@ public class KontakterActivity extends AppCompatActivity {
         TableLayout tl = findViewById(R.id.vennerList);
         tl.removeAllViews();
         lastKontakter(db.hentKontakter());
-
     }
 
     public void slettKontakt(Long id) {

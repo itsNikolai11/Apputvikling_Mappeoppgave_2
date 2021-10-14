@@ -22,18 +22,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="Venner"
+            android:text="Bestillinger"
             android:textSize="34sp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addKontaktNav"
+        android:id="@+id/addBestillingNav"
         android:layout_width="62dp"
         android:layout_height="57dp"
         android:layout_marginBottom="36dp"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="nyKontakt"
+        android:onClick="nyBestilling"
         app:backgroundTint="@color/primaryElementVariant"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +69,7 @@
                 android:orientation="vertical">
 
                 <TableLayout
-                    android:id="@+id/vennerList"
+                    android:id="@+id/bestillingerList"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_gravity="top"

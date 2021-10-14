@@ -130,28 +130,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/lagreRestaurant"
-        android:layout_width="128dp"
-        android:layout_height="65dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="50dp"
-        android:onClick="saveRestaurant"
-        android:text="Lagre"
-        app:icon="@drawable/ic_baseline_save_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/avbrytBtn"
-        android:layout_width="128dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="50dp"
-        android:text="Avbryt"
-        app:icon="@drawable/ic_baseline_cancel_24"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/lagreRestaurant"
-        app:layout_constraintHorizontal_bias="0.619"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="32dp">
+
+        <Button
+            android:id="@+id/lagreRestaurant"
+            android:layout_width="128dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="@color/positive"
+            android:onClick="saveRestaurant"
+            android:text="Lagre"
+            app:icon="@drawable/ic_baseline_save_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/avbrytBtn"
+            android:layout_width="128dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="50dp"
+            android:text="Avbryt"
+            app:icon="@drawable/ic_baseline_cancel_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/lagreRestaurant"
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

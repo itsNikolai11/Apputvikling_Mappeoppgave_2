@@ -3,7 +3,7 @@
     <style name="Theme.Mappeoppgave_2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryElementBG</item>
-        <item name="colorPrimaryVariant">@color/primaryElementVariant</item>
+        <item name="colorPrimaryVariant">@color/backgroundLighter</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/background</item>
