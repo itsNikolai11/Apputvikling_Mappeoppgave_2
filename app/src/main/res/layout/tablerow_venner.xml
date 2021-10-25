@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:theme="@style/TableRowElement"
-    android:layout_marginBottom="5dp">
+    android:theme="@style/TableRowElement">
 
     <LinearLayout
         android:layout_width="60dp"
@@ -15,8 +14,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_baseline_person_24"
             tools:ignore="ContentDescription" />
 
@@ -42,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TESTTEST"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
 
@@ -51,7 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TESTTEST" />
+            android:text="TESTTEST"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,26 +60,28 @@
         android:gravity="end">
 
         <Button
-            android:id="@+id/vennSlettBtn"
+            android:id="@+id/resSlettBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_background"
+            android:includeFontPadding="false"
             app:icon="@drawable/ic_baseline_delete_forever_24"
-            style="?android:attr/borderlessButtonStyle"
             tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/vennRedigerBtn"
+            android:id="@+id/resRedigerBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_background"
+            android:includeFontPadding="false"
             android:onClick="redigerKontakt"
             app:icon="@drawable/ic_baseline_edit_24"
-            style="?android:attr/borderlessButtonStyle"
             tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
     </LinearLayout>
 

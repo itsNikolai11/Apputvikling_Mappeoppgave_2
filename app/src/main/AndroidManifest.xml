@@ -18,10 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".KontakterActivity"/>
-        <activity android:name=".AddKontaktActivity"/>
-        <activity android:name=".RestauranterActivity"/>
-        <activity android:name=".AddRestaurantActivity"/>
+        <activity android:name=".KontakterActivity" />
+        <activity android:name=".AddKontaktActivity" />
+        <activity android:name=".RestauranterActivity" />
+        <activity android:name=".AddRestaurantActivity" />
+        <activity android:name=".BestillingerActivity" />
+        <activity android:name=".AddBestillingActivity" />
     </application>
 
 </manifest>

@@ -1,18 +1,24 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class DBHandler extends SQLiteOpenHelper {
+    @SuppressLint("SimpleDateFormat")
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     //Databasenavn og versjon
     public static final String DATABASE_NAVN = "ordreManager";
     public static final int DATABASE_VERSJON = 1;
@@ -54,7 +60,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FORNAVN + " TEXT," + KEY_ETTERNAVN + " TEXT," + KEY_TELEFON + " TEXT" + ")";
     //Ordre
     public static final String CREATE_TABLE_ORDRE = "CREATE TABLE " + TABLE_ORDRE
-            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_RESTAURANT_ID + " INTEGER," + KEY_TID + " DATETIME" + ")";
+            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_RESTAURANT_ID + " INTEGER," + KEY_TID + " TEXT" + ")";
     //OrdreKontakter
     public static final String CREATE_TABLE_ORDREKONTAKTER = "CREATE TABLE " + TABLE_ORDREVENNER
             + "(" + KEY_ORDRE_ID + " INTEGER PRIMARY KEY," + KEY_KONTAKT_ID + " INTEGER" + ")";
@@ -106,7 +112,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void lagreBestilling(Bestilling b) {
         SQLiteDatabase db = this.getWritableDatabase();
-
+        ContentValues ordreValues = new ContentValues();
+        ordreValues.put(KEY_RESTAURANT_ID, b.getRestaurantID());
+        ordreValues.put(KEY_TID, DATE_FORMAT.format(b.getTid()));
+        long id = db.insert(TABLE_ORDRE, null, ordreValues);
+        for (Kontakt k : b.getVenner()) {
+            ContentValues vennerValues = new ContentValues();
+            vennerValues.put(KEY_ORDRE_ID, id);
+            vennerValues.put(KEY_KONTAKT_ID, k.get_ID());
+            db.insert(TABLE_ORDREVENNER, null, vennerValues);
+        }
     }
 
     /*
@@ -132,8 +147,24 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public ArrayList<Bestilling> hentBestillinger() {
         SQLiteDatabase db = this.getWritableDatabase();
+        String select = "SELECT * FROM " + TABLE_ORDRE;
+        ArrayList<Bestilling> bestillinger = new ArrayList<>();
+        Cursor c = db.rawQuery(select, null);
+        if (c.moveToFirst()) {
+            do {
+                Bestilling b = new Bestilling();
+                b.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+                b.setRestaurantID(c.getLong((c.getColumnIndex(KEY_RESTAURANT_ID))));
+                try {
+                    b.setTid(DATE_FORMAT.parse(c.getString((c.getColumnIndex(KEY_TID)))));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                bestillinger.add(b);
 
-        return null;
+            } while (c.moveToNext());
+        }
+        return bestillinger;
     }
 
     public ArrayList<Restaurant> hentRestauranter() {
@@ -197,7 +228,8 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_KONTAKTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
-    public void slettRestaurant(Long id){
+
+    public void slettRestaurant(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }

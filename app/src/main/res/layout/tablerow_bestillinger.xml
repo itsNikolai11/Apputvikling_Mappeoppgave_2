@@ -29,14 +29,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/resID"
+            android:id="@+id/ordreID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="0sp"
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/resNavn"
+            android:id="@+id/navn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,13 +46,13 @@
 
 
         <TextView
-            android:id="@+id/resType"
+            android:id="@+id/adresse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Teststs" />
 
         <TextView
-            android:id="@+id/ordreTid"
+            android:id="@+id/telefon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,7 +66,7 @@
         android:gravity="end">
 
         <Button
-            android:id="@+id/ordreSlettBtn"
+            android:id="@+id/resSlettBtn"
             style="?android:attr/borderlessButtonStyle"
 
             android:layout_width="50dp"
@@ -74,11 +74,12 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_background"
+            android:onClick="slettRestaurant"
             app:icon="@drawable/ic_baseline_delete_forever_24"
             tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/ordreRedigerBtn"
+            android:id="@+id/resRedigerBtn"
             style="?android:attr/borderlessButtonStyle"
 
             android:layout_width="50dp"
@@ -86,6 +87,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_background"
+            android:onClick="redigerRestaurant"
             app:icon="@drawable/ic_baseline_edit_24"
             tools:ignore="ButtonStyle,SpeakableTextPresentCheck" />
     </LinearLayout>

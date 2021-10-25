@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="restaurant_types">
+        <item>FastFood</item>
+        <item>Take-Away</item>
+        <item>Gourmet</item>
+        <item>Middag</item>
+        <item>Annet</item>
+    </string-array>
+</resources>
