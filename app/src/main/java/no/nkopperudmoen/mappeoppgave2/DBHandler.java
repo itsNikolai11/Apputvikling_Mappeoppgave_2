@@ -116,11 +116,13 @@ public class DBHandler extends SQLiteOpenHelper {
         ordreValues.put(KEY_RESTAURANT_ID, b.getRestaurantID());
         ordreValues.put(KEY_TID, DATE_FORMAT.format(b.getTid()));
         long id = db.insert(TABLE_ORDRE, null, ordreValues);
-        for (Kontakt k : b.getVenner()) {
-            ContentValues vennerValues = new ContentValues();
-            vennerValues.put(KEY_ORDRE_ID, id);
-            vennerValues.put(KEY_KONTAKT_ID, k.get_ID());
-            db.insert(TABLE_ORDREVENNER, null, vennerValues);
+        if (b.getVenner() != null) {
+            for (Kontakt k : b.getVenner()) {
+                ContentValues vennerValues = new ContentValues();
+                vennerValues.put(KEY_ORDRE_ID, id);
+                vennerValues.put(KEY_KONTAKT_ID, k.get_ID());
+                db.insert(TABLE_ORDREVENNER, null, vennerValues);
+            }
         }
     }
 
@@ -187,15 +189,25 @@ public class DBHandler extends SQLiteOpenHelper {
         return restauranter;
     }
 
-    public Kontakt hentKontakt(int id) {
+    public Kontakt hentKontakt(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         return null;
     }
 
-    public Restaurant hentRestaurant(int id) {
+    public Restaurant hentRestaurant(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return null;
+        String select = "SELECT * FROM " + TABLE_RESTAURANTER + " WHERE " + KEY_ID + " = " + id;
+        Cursor c = db.rawQuery(select, null);
+        Restaurant r = new Restaurant();
+        if (c.moveToFirst()) {
+            r.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+            r.setNavn(c.getString((c.getColumnIndex(KEY_NAVN))));
+            r.setAdresse(c.getString((c.getColumnIndex(KEY_ADRESSE))));
+            r.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
+        }
+
+        return r;
     }
 
     public Bestilling hentBestilling(int id) {
@@ -232,5 +244,10 @@ public class DBHandler extends SQLiteOpenHelper {
     public void slettRestaurant(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+    public void slettBestilling(Long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_ORDRE, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.delete(TABLE_ORDREVENNER, KEY_ORDRE_ID + " = ?", new String[]{String.valueOf(id)});
     }
 }

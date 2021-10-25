@@ -31,4 +31,7 @@ public class AddKontaktActivity extends AppCompatActivity {
         db.close();
         finish();
     }
+    public void cancel(View v){
+        finish();
+    }
 }

@@ -54,4 +54,9 @@ public class Kontakt {
     public void setTelefon(String telefon) {
         this.telefon = telefon;
     }
+
+    @Override
+    public String toString() {
+        return fornavn + " " + etternavn;
+    }
 }

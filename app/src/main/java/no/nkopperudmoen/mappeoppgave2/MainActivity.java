@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void visBestillinger(View view) {
-
+        Intent i = new Intent(this, BestillingerActivity.class);
+        startActivity(i);
     }
 
     public void visVenner(View view) {

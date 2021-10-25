@@ -2,7 +2,6 @@ package no.nkopperudmoen.mappeoppgave2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -51,12 +50,12 @@ public class RestauranterActivity extends AppCompatActivity {
             tv.setText(adresse);
             tv = tr.findViewById(R.id.telefon);
             telefon = "Tlf: " + r.getTelefon();
-            btn = tr.findViewById(R.id.resSlettBtn);
+            btn = tr.findViewById(R.id.ordreSlettBtn);
             Long id = r.get_ID();
             btn.setOnClickListener(view -> {
                 slettRestaurant(id);
             });
-            btn = tr.findViewById(R.id.resRedigerBtn);
+            btn = tr.findViewById(R.id.ordreRedigerBtn);
             btn.setOnClickListener(view -> {
                 redigerRestaurant(id);
             });

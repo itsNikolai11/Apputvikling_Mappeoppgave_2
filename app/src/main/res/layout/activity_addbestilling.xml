@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="13dp"
+        android:text="Ny bestilling"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/lagreOrdre"
+        android:layout_width="128dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/positive"
+        android:onClick="lagreBestilling"
+        android:text="Lagre"
+        app:icon="@drawable/ic_baseline_save_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/avbrytBtn"
+        android:layout_width="128dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="50dp"
+        android:onClick="cancel"
+        android:text="Avbryt"
+        app:icon="@drawable/ic_baseline_cancel_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/restauranterSpinner"
+        style="@style/inputFields"
+        android:layout_width="200dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restauranterSpinner">
+
+        <EditText
+            android:id="@+id/ordreDato"
+            style="@style/inputFields"
+            android:layout_width="95dp"
+            android:layout_height="54dp"
+            android:datePickerMode="calendar"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/ordreTid"
+            style="@style/inputFields"
+            android:layout_width="95dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/vennerSpinner"
+        style="@style/inputFields"
+        android:layout_width="200dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Restaurant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Venner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

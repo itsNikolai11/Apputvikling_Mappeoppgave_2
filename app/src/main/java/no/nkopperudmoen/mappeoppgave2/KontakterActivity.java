@@ -2,7 +2,6 @@ package no.nkopperudmoen.mappeoppgave2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -51,11 +50,11 @@ public class KontakterActivity extends AppCompatActivity {
             tv.setText(navn);
             tv = tr.findViewById(R.id.telefon);
             tv.setText(tlf);
-            btn = tr.findViewById(R.id.resSlettBtn);
+            btn = tr.findViewById(R.id.ordreSlettBtn);
             btn.setOnClickListener(view -> {
                 slettKontakt(id);
             });
-            btn = tr.findViewById(R.id.resRedigerBtn);
+            btn = tr.findViewById(R.id.ordreRedigerBtn);
             btn.setOnClickListener(view -> {
                 redigerKontakt(id);
             });

@@ -40,4 +40,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         db.leggTilRestaurant(r);
         finish();
     }
+    public void cancel(View v){
+        finish();
+    }
 }
