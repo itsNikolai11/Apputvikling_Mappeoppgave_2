@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mappeoppgave_2</string>
+    <string name="sharedPrefs">no.nkopperudmoen.sharedpreferences</string>
+    <string name="editUser">editUserID</string>
 </resources>

@@ -191,8 +191,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Kontakt hentKontakt(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        return null;
+        String select = "SELECT * FROM " + TABLE_KONTAKTER + " WHERE " + KEY_ID + " = " + id;
+        Cursor c = db.rawQuery(select, null);
+        Kontakt k = new Kontakt();
+        if (c.moveToFirst()) {
+            k.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+            k.setFornavn(c.getString((c.getColumnIndex(KEY_FORNAVN))));
+            k.setEtternavn(c.getString((c.getColumnIndex(KEY_ETTERNAVN))));
+            k.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
+        }
+        return k;
     }
 
     public Restaurant hentRestaurant(Long id) {
@@ -220,7 +228,11 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public int endreKontakt(Kontakt k) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return 0;
+        ContentValues values = new ContentValues();
+        values.put(KEY_FORNAVN, k.getFornavn());
+        values.put(KEY_ETTERNAVN, k.getEtternavn());
+        values.put(KEY_TELEFON, k.getTelefon());
+        return db.update(TABLE_KONTAKTER, values, KEY_ID + " =?", new String[]{String.valueOf(k.get_ID())});
     }
 
     public int endreRestaurant(Restaurant r) {
@@ -245,7 +257,8 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
-    public void slettBestilling(Long id){
+
+    public void slettBestilling(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ORDRE, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         db.delete(TABLE_ORDREVENNER, KEY_ORDRE_ID + " = ?", new String[]{String.valueOf(id)});

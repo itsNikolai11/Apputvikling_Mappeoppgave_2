@@ -1,6 +1,8 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -50,7 +52,7 @@ public class KontakterActivity extends AppCompatActivity {
             tv.setText(navn);
             tv = tr.findViewById(R.id.telefon);
             tv.setText(tlf);
-            btn = tr.findViewById(R.id.ordreSlettBtn);
+            btn = tr.findViewById(R.id.ordreFjernKontakt);
             btn.setOnClickListener(view -> {
                 slettKontakt(id);
             });
@@ -81,7 +83,12 @@ public class KontakterActivity extends AppCompatActivity {
     }
 
     public void redigerKontakt(Long id) {
-        //TODO ny aktivitet
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(getString(R.string.editUser), id);
+        editor.apply();
+        Intent i = new Intent(this, EditKontaktActivity.class);
+        startActivity(i);
     }
 
 }

@@ -10,105 +10,157 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="3dp"
         android:text="Ny bestilling"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Restaurant"
+        app:layout_constraintBottom_toTopOf="@+id/restauranterSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/restauranterSpinner"
+        style="@style/inputFields"
+        android:layout_width="258dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:popupBackground="@drawable/input_bg"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/tidsvelgerLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tidsvelgerLayout"
+        android:layout_width="258dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restauranterSpinner">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dato"
+            app:layout_constraintBottom_toTopOf="@+id/ordreDato"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
+
+        <EditText
+            android:id="@+id/ordreDato"
+            style="@style/inputFields"
+            android:layout_width="124dp"
+            android:layout_height="54dp"
+            android:contextClickable="false"
+            android:datePickerMode="calendar"
+            android:focusable="false"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/ordreTid"
+            style="@style/inputFields"
+            android:layout_width="124dp"
+            android:layout_height="54dp"
+            android:focusable="false"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="52dp"
+            android:text="Klokkeslett"
+            app:layout_constraintBottom_toTopOf="@+id/ordreTid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="412dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/avbrytBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+        <TableLayout
+            android:id="@+id/selectedKontakter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:divider="@drawable/list_divider"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:showDividers="middle"
+            app:tabMode="scrollable" />
+    </ScrollView>
+
     <Button
-        android:id="@+id/lagreOrdre"
-        android:layout_width="128dp"
-        android:layout_height="65dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="@color/positive"
-        android:onClick="lagreBestilling"
-        android:text="Lagre"
-        app:icon="@drawable/ic_baseline_save_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:onClick="leggTilVenner"
+        android:text="Legg til venner"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tidsvelgerLayout" />
 
     <Button
         android:id="@+id/avbrytBtn"
         android:layout_width="128dp"
         android:layout_height="65dp"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:onClick="cancel"
         android:text="Avbryt"
         app:icon="@drawable/ic_baseline_cancel_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/restauranterSpinner"
-        style="@style/inputFields"
-        android:layout_width="200dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restauranterSpinner">
-
-        <EditText
-            android:id="@+id/ordreDato"
-            style="@style/inputFields"
-            android:layout_width="95dp"
-            android:layout_height="54dp"
-            android:datePickerMode="calendar"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/ordreTid"
-            style="@style/inputFields"
-            android:layout_width="95dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="10dp"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <Spinner
-        android:id="@+id/vennerSpinner"
-        style="@style/inputFields"
-        android:layout_width="200dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Restaurant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Venner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+    <Button
+        android:id="@+id/lagreOrdre"
+        android:layout_width="128dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/positive"
+        android:onClick="lagreBestilling"
+        android:text="Lagre"
+        app:icon="@drawable/ic_baseline_save_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

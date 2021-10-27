@@ -50,7 +50,7 @@ public class RestauranterActivity extends AppCompatActivity {
             tv.setText(adresse);
             tv = tr.findViewById(R.id.telefon);
             telefon = "Tlf: " + r.getTelefon();
-            btn = tr.findViewById(R.id.ordreSlettBtn);
+            btn = tr.findViewById(R.id.ordreFjernKontakt);
             Long id = r.get_ID();
             btn.setOnClickListener(view -> {
                 slettRestaurant(id);

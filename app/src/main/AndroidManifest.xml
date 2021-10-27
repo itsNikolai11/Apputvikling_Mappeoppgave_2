@@ -24,6 +24,9 @@
         <activity android:name=".AddRestaurantActivity" />
         <activity android:name=".BestillingerActivity" />
         <activity android:name=".AddBestillingActivity" />
+        <activity android:name=".ActivitySelectKontakter" />
+        <activity android:name=".EditKontaktActivity" />
+
     </application>
 
 </manifest>

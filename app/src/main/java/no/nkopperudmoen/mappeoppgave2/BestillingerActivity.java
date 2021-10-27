@@ -37,14 +37,14 @@ public class BestillingerActivity extends AppCompatActivity {
         for (Bestilling b : bestillinger) {
             Restaurant r = db.hentRestaurant(b.getRestaurantID());
             tr = (TableRow) getLayoutInflater().inflate(R.layout.tablerow_bestillinger, null);
-            tv = tr.findViewById(R.id.resNavn);
+            tv = tr.findViewById(R.id.ordreKNavn);
             tv.setText(r.getNavn());
-            tv = tr.findViewById(R.id.resAdresse);
+            tv = tr.findViewById(R.id.ordreKTelefon);
             tv.setText(r.getAdresse());
             tv = tr.findViewById(R.id.tid);
             tv.setText(dateFormat.format(b.getTid()));
             Long id = b.get_ID();
-            Button btn = tr.findViewById(R.id.ordreSlettBtn);
+            Button btn = tr.findViewById(R.id.ordreFjernKontakt);
             btn.setOnClickListener(view -> {
                 slettBestilling(id);
             });
