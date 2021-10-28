@@ -1,6 +1,8 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -83,6 +85,11 @@ public class RestauranterActivity extends AppCompatActivity {
     }
 
     public void redigerRestaurant(Long id) {
-
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(getString(R.string.editRestaurant), id);
+        editor.apply();
+        Intent i = new Intent(this, EditRestaurantActivity.class);
+        startActivity(i);
     }
 }

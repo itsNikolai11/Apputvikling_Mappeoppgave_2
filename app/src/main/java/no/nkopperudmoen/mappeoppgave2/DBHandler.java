@@ -214,7 +214,6 @@ public class DBHandler extends SQLiteOpenHelper {
             r.setAdresse(c.getString((c.getColumnIndex(KEY_ADRESSE))));
             r.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
         }
-
         return r;
     }
 
@@ -237,7 +236,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public int endreRestaurant(Restaurant r) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return 0;
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAVN, r.getNavn());
+        values.put(KEY_ADRESSE, r.getAdresse());
+        values.put(KEY_POSTNR, r.getPostNr());
+        values.put(KEY_TELEFON, r.getTelefon());
+        values.put(KEY_TYPE, r.getType());
+        return db.update(TABLE_RESTAURANTER, values, KEY_ID + " =?", new String[]{String.valueOf(r.get_ID())});
     }
 
     public int endreBestilling(Bestilling b) {

@@ -3,7 +3,9 @@ package no.nkopperudmoen.mappeoppgave2;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +50,25 @@ public class AddBestillingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_addbestilling);
         setupTimeDialogs();
         initializeSpinners();
+        visValgteKontakter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Gson gson = new Gson();
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String arrayJson = prefs.getString(getString(R.string.selectVenner), "");
+        Type t = new TypeToken<ArrayList<Kontakt>>(){}.getType();
+        ArrayList<Kontakt> tempArray = gson.fromJson(arrayJson, t);
+        if(tempArray!=null){
+            for(Kontakt k : tempArray){
+                if(!kontakter.contains(k)){
+                    kontakter.add(k);
+                }
+            }
+        }
         visValgteKontakter();
     }
 
@@ -93,8 +118,12 @@ public class AddBestillingActivity extends AppCompatActivity {
     public void visValgteKontakter() {
         TableLayout tl = (TableLayout) findViewById(R.id.selectedKontakter);
         TableRow tr;
+        tl.removeAllViews();
         TextView tv;
         Button btn;
+        if(kontakter.isEmpty()){
+            return;
+        }
         for (Kontakt k : kontakter) {
             tr = (TableRow) getLayoutInflater().inflate(R.layout.tablerow_ordre_kontakt, null);
             tv = tr.findViewById(R.id.ordreKNavn);
@@ -126,7 +155,9 @@ public class AddBestillingActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        b.setVenner(kontakter);
         db.lagreBestilling(b);
+
         finish();
     }
 
@@ -137,5 +168,14 @@ public class AddBestillingActivity extends AppCompatActivity {
     public void leggTilVenner(View view) {
         Intent i = new Intent(this, ActivitySelectKontakter.class);
         startActivity(i);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getString(R.string.selectVenner), "");
+        editor.apply();
     }
 }

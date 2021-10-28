@@ -18,7 +18,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrestaurant);
         db = new DBHandler(getApplicationContext());
-        Spinner s = findViewById(R.id.inputResType);
+        Spinner s = findViewById(R.id.inputResTypeEdit);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.restaurant_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -29,13 +29,13 @@ public class AddRestaurantActivity extends AppCompatActivity {
         EditText txt;
         Spinner s;
         Restaurant r = new Restaurant();
-        txt = (EditText) findViewById(R.id.inpuntResNavn);
+        txt = (EditText) findViewById(R.id.inputResNavnEdit);
         r.setNavn(txt.getText().toString());
-        txt = (EditText) findViewById(R.id.inputResAdresse);
+        txt = (EditText) findViewById(R.id.inputResAdresseEdit);
         r.setAdresse(txt.getText().toString());
-        txt = (EditText) findViewById(R.id.inputResTlf);
+        txt = (EditText) findViewById(R.id.inputResTlfEdit);
         r.setTelefon(txt.getText().toString());
-        s = (Spinner) findViewById(R.id.inputResType);
+        s = (Spinner) findViewById(R.id.inputResTypeEdit);
         r.setType(s.getSelectedItem().toString());
         db.leggTilRestaurant(r);
         finish();

@@ -1,5 +1,7 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -11,7 +13,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 
@@ -24,6 +35,7 @@ public class ActivitySelectKontakter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_kontakter);
         db = new DBHandler(getApplicationContext());
+        //lastValgteKontakter();
         lastKontakter();
     }
 
@@ -35,6 +47,18 @@ public class ActivitySelectKontakter extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    public void lastValgteKontakter() {
+        Gson gson = new Gson();
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        String arrayJson = prefs.getString(getString(R.string.selectVenner), "");
+        Type t = new TypeToken<ArrayList<Kontakt>>() {
+        }.getType();
+        ArrayList<Kontakt> tempArray = gson.fromJson(arrayJson, t);
+        if (tempArray != null) {
+            selectedKontakter.addAll(tempArray);
+        }
     }
 
     public void lastKontakter() {
@@ -75,5 +99,14 @@ public class ActivitySelectKontakter extends AppCompatActivity {
             btn.setOnClickListener(deselect);
 
         }
+    }
+
+    public void saveSelected(View v) {
+        Gson gson = new Gson();
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getString(R.string.selectVenner), gson.toJson(selectedKontakter));
+        editor.apply();
+        finish();
     }
 }
