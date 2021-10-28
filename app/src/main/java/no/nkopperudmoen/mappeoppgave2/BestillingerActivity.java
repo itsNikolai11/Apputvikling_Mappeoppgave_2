@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class BestillingerActivity extends AppCompatActivity {

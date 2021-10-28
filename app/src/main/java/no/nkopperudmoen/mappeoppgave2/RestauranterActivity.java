@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class RestauranterActivity extends AppCompatActivity {

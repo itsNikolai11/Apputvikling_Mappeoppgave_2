@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 
 public class KontakterActivity extends AppCompatActivity {

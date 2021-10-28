@@ -8,6 +8,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class AddRestaurantActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         db = new DBHandler(getApplicationContext());
         Spinner s = findViewById(R.id.inputResTypeEdit);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.restaurant_types, android.R.layout.simple_spinner_item);
+                R.array.restaurant_types, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
     }

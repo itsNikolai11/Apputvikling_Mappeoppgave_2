@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 
 public class EditKontaktActivity extends AppCompatActivity {

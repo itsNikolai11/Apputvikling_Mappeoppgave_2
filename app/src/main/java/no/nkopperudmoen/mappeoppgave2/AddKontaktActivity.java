@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.Tools.Validator;
 

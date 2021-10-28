@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
+import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
@@ -104,14 +105,9 @@ public class AddBestillingActivity extends AppCompatActivity {
     public void initializeSpinners() {
         Spinner resSpinner = findViewById(R.id.restauranterSpinner);
         ArrayList<Restaurant> restauranter = db.hentRestauranter();
-        ArrayList<Kontakt> kontakter = db.hentKontakter();
-        ArrayAdapter<Restaurant> resAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, restauranter);
+        ArrayAdapter<Restaurant> resAdapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, restauranter);
         resAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         resSpinner.setAdapter(resAdapter);
-        ArrayAdapter<Kontakt> kontaktAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, kontakter);
-        kontaktAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
     }
 
     @SuppressLint({"SetTextI18n", "InflateParams"})

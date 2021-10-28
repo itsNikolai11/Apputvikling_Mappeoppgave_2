@@ -1,4 +1,4 @@
-package no.nkopperudmoen.mappeoppgave2;
+package no.nkopperudmoen.mappeoppgave2.Models;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -10,11 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
-import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
-import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
-import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
 public class DBHandler extends SQLiteOpenHelper {
     @SuppressLint("SimpleDateFormat")
@@ -147,6 +142,24 @@ public class DBHandler extends SQLiteOpenHelper {
         return kontakter;
     }
 
+    public ArrayList<Kontakt> hentKontakterIBestilling(Long id) {
+        ArrayList<Kontakt> kontakter = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String select = "SELECT * FROM " + TABLE_ORDREVENNER + " WHERE " + KEY_ORDRE_ID + " = " + id;
+        Cursor c = db.rawQuery(select, null);
+        if (c.moveToFirst()) {
+            do {
+                Kontakt k = new Kontakt();
+                k.setFornavn(c.getString((c.getColumnIndex(KEY_FORNAVN))));
+                k.setEtternavn(c.getString((c.getColumnIndex(KEY_ETTERNAVN))));
+                k.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
+                k.set_ID(c.getLong((c.getColumnIndex(KEY_KONTAKT_ID))));
+
+            } while (c.moveToNext());
+        }
+        return kontakter;
+    }
+
     public ArrayList<Bestilling> hentBestillinger() {
         SQLiteDatabase db = this.getWritableDatabase();
         String select = "SELECT * FROM " + TABLE_ORDRE;
@@ -162,6 +175,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                //b.setVenner(this.hentKontakterIBestilling(b.get_ID()));
                 bestillinger.add(b);
 
             } while (c.moveToNext());
@@ -225,16 +239,16 @@ public class DBHandler extends SQLiteOpenHelper {
     /*
     Endre-metoder
      */
-    public int endreKontakt(Kontakt k) {
+    public void endreKontakt(Kontakt k) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_FORNAVN, k.getFornavn());
         values.put(KEY_ETTERNAVN, k.getEtternavn());
         values.put(KEY_TELEFON, k.getTelefon());
-        return db.update(TABLE_KONTAKTER, values, KEY_ID + " =?", new String[]{String.valueOf(k.get_ID())});
+        db.update(TABLE_KONTAKTER, values, KEY_ID + " =?", new String[]{String.valueOf(k.get_ID())});
     }
 
-    public int endreRestaurant(Restaurant r) {
+    public void endreRestaurant(Restaurant r) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAVN, r.getNavn());
@@ -242,7 +256,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_POSTNR, r.getPostNr());
         values.put(KEY_TELEFON, r.getTelefon());
         values.put(KEY_TYPE, r.getType());
-        return db.update(TABLE_RESTAURANTER, values, KEY_ID + " =?", new String[]{String.valueOf(r.get_ID())});
+        db.update(TABLE_RESTAURANTER, values, KEY_ID + " =?", new String[]{String.valueOf(r.get_ID())});
     }
 
     public int endreBestilling(Bestilling b) {
@@ -255,9 +269,15 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void slettKontakt(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
+        slettVennFraOrdre(id);
         db.delete(TABLE_KONTAKTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
-    }
 
+    }
+    public void slettVennFraOrdre(Long id){
+        //Dersom en venn slettes, fjern referanse fra ORDREVENNER-tabellen.
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_ORDREVENNER, KEY_KONTAKT_ID + " = ?", new String[]{String.valueOf(id)});
+    }
     public void slettRestaurant(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
