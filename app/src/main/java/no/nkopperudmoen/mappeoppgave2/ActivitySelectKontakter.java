@@ -59,6 +59,7 @@ public class ActivitySelectKontakter extends AppCompatActivity {
         if (tempArray != null) {
             selectedKontakter.addAll(tempArray);
         }
+        //TODO fjern kontakter med matchende IDer fra kontaktene hentet i databasen.
     }
 
     public void lastKontakter() {
