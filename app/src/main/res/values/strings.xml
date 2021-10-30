@@ -8,4 +8,6 @@
     <string name="visBestillingID">visBestillingID</string>
     <string name="prefStandardSMS">standardSMS</string>
     <string name="prefSendSMS">sendSMS</string>
+    <string name="smsAlertHour">smsAlertHour</string>
+    <string name="smsAlertMin">smsAlertMin</string>
 </resources>
