@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="3dp"
-            android:text="Ny bestilling"
+            android:text="@string/nyOrdre"
             android:textSize="34sp" />
     </LinearLayout>
 
@@ -38,7 +38,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant" />
+            android:text="@string/Restaurant" />
 
         <Spinner
             android:id="@+id/restauranterSpinner"
@@ -62,7 +62,7 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dato"
+                android:text="@string/Dato"
                 app:layout_constraintBottom_toTopOf="@+id/ordreDato"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="52dp"
-                android:text="Klokkeslett"
+                android:text="@string/Klokkeslett"
                 app:layout_constraintBottom_toTopOf="@+id/ordreTid"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="leggTilVenner"
-        android:text="Legg til venner"
+        android:text="@string/addVenner"
         app:icon="@drawable/ic_baseline_person_add_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +153,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginBottom="16dp"
         android:onClick="cancel"
-        android:text="Avbryt"
+        android:text="@string/avbryt"
         app:icon="@drawable/ic_baseline_cancel_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -166,7 +166,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/positive"
         android:onClick="lagreBestilling"
-        android:text="Lagre"
+        android:text="@string/lagre"
         app:icon="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

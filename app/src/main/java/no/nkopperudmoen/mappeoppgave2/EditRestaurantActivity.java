@@ -38,11 +38,11 @@ public class EditRestaurantActivity extends AppCompatActivity {
         ETTelefon = (EditText) findViewById(R.id.inputResTlfEdit);
         type = (Spinner) findViewById(R.id.inputResTypeEdit);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.restaurant_types, android.R.layout.simple_spinner_item);
+                R.array.restaurant_types, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         type.setAdapter(adapter);
         SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
-        Long resID = prefs.getLong(getString(R.string.editRestaurant), 0);
+        Long resID = prefs.getLong(getString(R.string.editResID), 0);
         r = db.hentRestaurant(resID);
         ETNavn.setText(r.getNavn());
         ETAdresse.setText(r.getAdresse());

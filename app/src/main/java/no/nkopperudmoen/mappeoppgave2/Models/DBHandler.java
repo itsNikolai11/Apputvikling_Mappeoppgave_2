@@ -176,7 +176,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //b.setVenner(this.hentKontakterIBestilling(b.get_ID()));
+                b.setVenner(this.hentKontakterIBestilling(b.get_ID()));
                 bestillinger.add(b);
 
             } while (c.moveToNext());
@@ -229,6 +229,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             r.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
             r.setNavn(c.getString((c.getColumnIndex(KEY_NAVN))));
+            r.setPostNr(c.getInt((c.getColumnIndex(KEY_POSTNR))));
             r.setAdresse(c.getString((c.getColumnIndex(KEY_ADRESSE))));
             r.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
         }

@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
+        android:backgroundTintMode="add"
         android:defaultValue="Du har en kommende restaurant på %restaurant% i dag klokken %klokkeslett%!"
         android:icon="@drawable/ic_baseline_message_24"
         android:key="@string/prefStandardSMS"

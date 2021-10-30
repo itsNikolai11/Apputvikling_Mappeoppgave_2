@@ -66,7 +66,8 @@ public class ActivitySelectKontakter extends AppCompatActivity {
         for (Kontakt k : kontakter) {
             tr = (TableRow) getLayoutInflater().inflate(R.layout.tablerow_ordre_add_kontakt, null);
             TextView tv = tr.findViewById(R.id.kontaktNavn);
-            tv.setText(k.getFornavn() + " " + k.getEtternavn());
+            String txt = k.getFornavn() + " " + k.getEtternavn();
+            tv.setText(txt);
             Button btn = tr.findViewById(R.id.ordreAddKontakt);
             TableRow finalTr = tr;
             setSelectListener(btn, finalTr, false, k);

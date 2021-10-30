@@ -28,7 +28,7 @@ public class PeriodiskService extends Service {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         cal.setTimeInMillis(System.currentTimeMillis());
         cal.set(Calendar.MINUTE, prefs.getInt(getString(R.string.smsAlertMin), 0));
-        cal.set(Calendar.HOUR, prefs.getInt(getString(R.string.smsAlertHour), 0));
+        cal.set(Calendar.HOUR_OF_DAY, prefs.getInt(getString(R.string.smsAlertHour), 0));
         Intent i = new Intent(this, OrdreNotifyService.class);
         PendingIntent pIntent = PendingIntent.getService(this, 0, i, 0);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

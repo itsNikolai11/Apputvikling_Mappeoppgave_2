@@ -88,7 +88,7 @@ public class RestauranterActivity extends AppCompatActivity {
     public void redigerRestaurant(Long id) {
         SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(getString(R.string.editRestaurant), id);
+        editor.putLong(getString(R.string.editResID), id);
         editor.apply();
         Intent i = new Intent(this, EditRestaurantActivity.class);
         startActivity(i);

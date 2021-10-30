@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import no.nkopperudmoen.mappeoppgave2.R;
 
 public class ExitDialogFragment extends DialogFragment {
     private DialogClickListener callback;
@@ -26,11 +29,12 @@ public class ExitDialogFragment extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new AlertDialog.Builder(getActivity()).setTitle("Advarsel!")
-                .setMessage("Er du sikker på at du vil avbryte? Alle data vil bli resatt")
-                .setPositiveButton("Ja", (dialogInterface, i) -> callback.onYesClick())
-                .setNegativeButton("Nei", (dialogInterface, i) -> callback.onNoClick()).create();
+        return new AlertDialog.Builder(getActivity()).setTitle(R.string.ExitDialogTitle)
+                .setMessage(R.string.ExitDialogMsg)
+                .setPositiveButton(getString(R.string.ja), (dialogInterface, i) -> callback.onYesClick())
+                .setNegativeButton(getString(R.string.nei), (dialogInterface, i) -> callback.onNoClick()).create();
     }
 }

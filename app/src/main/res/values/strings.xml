@@ -2,7 +2,7 @@
     <string name="app_name">Mappeoppgave_2</string>
     <string name="sharedPrefs">no.nkopperudmoen.sharedpreferences</string>
     <string name="editUser">editUserID</string>
-    <string name="editRestaurant">editResID</string>
+    <string name="editResID">editResID</string>
     <string name="selectVenner">selectedVennerArray</string>
     <string name="varselKanal">varselKanal</string>
     <string name="visBestillingID">visBestillingID</string>
@@ -10,4 +10,38 @@
     <string name="prefSendSMS">sendSMS</string>
     <string name="smsAlertHour">smsAlertHour</string>
     <string name="smsAlertMin">smsAlertMin</string>
+
+    <string name="ja">Ja</string>
+    <string name="nei">Nei</string>
+    <string name="avbryt">Avbryt</string>
+    <string name="lagre">Lagre</string>
+
+    <string name="Bestillinger">Bestillinger</string>
+    <string name="Venner">Venner</string>
+    <string name="Restauranter">Restauranter</string>
+    <string name="Preferanser">Preferanser</string>
+
+    <string name="ExitDialogTitle">Advarsel!</string>
+    <string name="ExitDialogMsg">"Er du sikker på at du vil avbryte? Alle data vil bli resatt"</string>
+    <string name="nyOrdre">Ny Bestilling</string>
+    <string name="addVenn">Legg til venn</string>
+    <string name="addVenner">Legg til venner</string>
+    <string name="editVenn">Rediger venn</string>
+    <string name="addRestaurant">Ny Restaurant</string>
+    <string name="editRestaurant">Rediger Restaurant</string>
+    <string name="Restaurant">Restaurant</string>
+    <string name="Dato">Dato</string>
+    <string name="Klokkeslett">Klokkeslett</string>
+    <string name="fornavn">Fornavn</string>
+    <string name="etternavn">Etternavn</string>
+    <string name="telefon">Telefon</string>
+    <string name="navn">Navn</string>
+    <string name="adresse">Adresse</string>
+    <string name="postnr">PostNr</string>
+    <string name="type">Type</string>
+    <string name="smsPrefText">Tidspunkt for SMS-utsendelse</string>
+    <string name="Bestilling">Bestilling</string>
+
+
+
 </resources>

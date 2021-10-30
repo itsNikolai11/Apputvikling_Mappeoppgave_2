@@ -64,7 +64,6 @@ public class AddBestillingActivity extends AppCompatActivity implements ExitDial
         super.onResume();
         Gson gson = new Gson();
         SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
         String arrayJson = prefs.getString(getString(R.string.selectVenner), "");
         Type t = new TypeToken<ArrayList<Kontakt>>() {
         }.getType();
@@ -81,12 +80,12 @@ public class AddBestillingActivity extends AppCompatActivity implements ExitDial
 
     public void setupTimeDialogs() {
         final Calendar calendar = Calendar.getInstance();
-        dateSelect = (EditText) findViewById(R.id.ordreDato);
+        dateSelect = findViewById(R.id.ordreDato);
         dateSelect.setOnClickListener(view -> {
             int calDay = calendar.get(Calendar.DAY_OF_MONTH);
             int calMonth = calendar.get(Calendar.MONTH);
             int calYear = calendar.get(Calendar.YEAR);
-            datePicker = new DatePickerDialog(AddBestillingActivity.this, (datePicker, year, month, day) -> {
+            datePicker = new DatePickerDialog(AddBestillingActivity.this, R.style.DatePicker, (datePicker, year, month, day) -> {
                 //Måneder begynner på 0, for å unngå offByOne feil
                 month = month + 1;
                 dateSelect.setText(day + "/" + month + "-" + year);
@@ -94,11 +93,11 @@ public class AddBestillingActivity extends AppCompatActivity implements ExitDial
             }, calYear, calMonth, calDay);
             datePicker.show();
         });
-        timeSelect = (EditText) findViewById(R.id.ordreTid);
+        timeSelect = findViewById(R.id.ordreTid);
         timeSelect.setOnClickListener(view -> {
             int calHour = calendar.get(Calendar.HOUR_OF_DAY);
             int calMinute = calendar.get(Calendar.MINUTE);
-            timePicker = new TimePickerDialog(AddBestillingActivity.this, (timePicker, hour, minute) -> {
+            timePicker = new TimePickerDialog(AddBestillingActivity.this, R.style.TimePicker, (timePicker, hour, minute) -> {
                 timeSelect.setText(hour + ":" + minute);
                 time += hour + ":" + minute;
 
@@ -164,7 +163,6 @@ public class AddBestillingActivity extends AppCompatActivity implements ExitDial
     }
 
 
-
     public void leggTilVenner(View view) {
         Intent i = new Intent(this, ActivitySelectKontakter.class);
         startActivity(i);
@@ -188,10 +186,12 @@ public class AddBestillingActivity extends AppCompatActivity implements ExitDial
                     Manifest.permission.READ_PHONE_STATE}, 0);
         }
     }
+
     public void cancel(View v) {
-        DialogFragment cancelDialog =new ExitDialogFragment();
+        DialogFragment cancelDialog = new ExitDialogFragment();
         cancelDialog.show(getSupportFragmentManager(), "cancelDialog");
     }
+
     @Override
     public void onYesClick() {
         SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
