@@ -1,5 +1,6 @@
 package no.nkopperudmoen.mappeoppgave2.Models;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,6 +50,10 @@ public class Bestilling {
 
     public String getKlokkeslett() {
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm");
+        return DATE_FORMAT.format(this.getTid());
+    }
+    public String getTidAsString(){
+        DateFormat DATE_FORMAT = new SimpleDateFormat("E dd MMM yyyy HH:mm");
         return DATE_FORMAT.format(this.getTid());
     }
 

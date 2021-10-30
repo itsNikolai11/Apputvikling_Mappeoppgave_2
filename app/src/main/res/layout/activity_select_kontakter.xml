@@ -52,9 +52,9 @@
 
                 <TableLayout
                     android:id="@+id/vennerSelectList"
-                    android:layout_width="fill_parent"
+                    android:layout_width="258dp"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="top"
+                    android:layout_gravity="center_horizontal|top"
                     android:divider="@drawable/list_divider"
                     android:padding="10dp"
                     android:showDividers="middle"

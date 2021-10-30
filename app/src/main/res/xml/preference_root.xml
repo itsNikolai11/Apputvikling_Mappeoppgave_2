@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="Du har en kommende restaurant på %restaurant% i dag klokken %klokkeslett%!"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:key="@string/prefStandardSMS"
+        android:selectAllOnFocus="true"
+        android:title="Standard SMS-melding" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/ic_baseline_notifications_active_24"
+        android:theme="@style/Switch"
+        android:key="@string/prefSendSMS"
+        android:title="SMS-varsling" />
+
+</PreferenceScreen>

@@ -1,11 +1,13 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,12 +32,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import no.nkopperudmoen.mappeoppgave2.Fragments.ExitDialogFragment;
 import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
 import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
-public class AddBestillingActivity extends AppCompatActivity {
+public class AddBestillingActivity extends AppCompatActivity implements ExitDialogFragment.DialogClickListener {
     DBHandler db;
     DatePickerDialog datePicker;
     TimePickerDialog timePicker;
@@ -61,11 +66,12 @@ public class AddBestillingActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         String arrayJson = prefs.getString(getString(R.string.selectVenner), "");
-        Type t = new TypeToken<ArrayList<Kontakt>>(){}.getType();
+        Type t = new TypeToken<ArrayList<Kontakt>>() {
+        }.getType();
         ArrayList<Kontakt> tempArray = gson.fromJson(arrayJson, t);
-        if(tempArray!=null){
-            for(Kontakt k : tempArray){
-                if(!kontakter.contains(k)){
+        if (tempArray != null) {
+            for (Kontakt k : tempArray) {
+                if (!kontakter.contains(k)) {
                     kontakter.add(k);
                 }
             }
@@ -117,7 +123,7 @@ public class AddBestillingActivity extends AppCompatActivity {
         tl.removeAllViews();
         TextView tv;
         Button btn;
-        if(kontakter.isEmpty()){
+        if (kontakter.isEmpty()) {
             return;
         }
         for (Kontakt k : kontakter) {
@@ -153,13 +159,11 @@ public class AddBestillingActivity extends AppCompatActivity {
         }
         b.setVenner(kontakter);
         db.lagreBestilling(b);
-
+        checkSMSPermission();
         finish();
     }
 
-    public void cancel(View v) {
-        finish();
-    }
+
 
     public void leggTilVenner(View view) {
         Intent i = new Intent(this, ActivitySelectKontakter.class);
@@ -173,5 +177,32 @@ public class AddBestillingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.selectVenner), "");
         editor.apply();
+    }
+
+    public void checkSMSPermission() {
+        int MY_PERMISSIONS_REQUEST_SEND_SMS = ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        int MY_PHONE_STATE_PERM = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        if (!(MY_PERMISSIONS_REQUEST_SEND_SMS == PackageManager.PERMISSION_GRANTED
+                && MY_PHONE_STATE_PERM == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS,
+                    Manifest.permission.READ_PHONE_STATE}, 0);
+        }
+    }
+    public void cancel(View v) {
+        DialogFragment cancelDialog =new ExitDialogFragment();
+        cancelDialog.show(getSupportFragmentManager(), "cancelDialog");
+    }
+    @Override
+    public void onYesClick() {
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getString(R.string.selectVenner), "");
+        editor.apply();
+        finish();
+    }
+
+    @Override
+    public void onNoClick() {
+
     }
 }

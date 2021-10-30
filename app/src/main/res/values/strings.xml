@@ -5,4 +5,7 @@
     <string name="editRestaurant">editResID</string>
     <string name="selectVenner">selectedVennerArray</string>
     <string name="varselKanal">varselKanal</string>
+    <string name="visBestillingID">visBestillingID</string>
+    <string name="prefStandardSMS">standardSMS</string>
+    <string name="prefSendSMS">sendSMS</string>
 </resources>

@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="258dp"
         android:layout_height="250dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
@@ -140,7 +140,7 @@
                 android:layout_gravity="top"
                 android:divider="@drawable/list_divider"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:paddingBottom="10dp"
                 android:showDividers="middle"
                 app:tabMode="scrollable" />
         </ScrollView>

@@ -15,6 +15,7 @@
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_edit_restaurant.xml" value="0.23097826086956522" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_kontakter.xml" value="0.27445652173913043" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_main.xml" value="0.27445652173913043" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_preferences.xml" value="0.2259963768115942" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_restauranter.xml" value="0.2608695652173913" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_select_kontakter.xml" value="0.36666666666666664" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/activity_vis_bestilling.xml" value="0.20520833333333333" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/tablerow_ordre_kontakt.xml" value="0.36666666666666664" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/tablerow_restauranter.xml" value="0.27445652173913043" />
         <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/layout/tablerow_venner.xml" value="0.27445652173913043" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/xml/preference_root.xml" value="0.2259963768115942" />
+        <entry key="..\:/Skole/5.Semester/DAVE3600-Apputvikling/Innleveringer/Mappe2/Prosjekt/app/src/main/res/xml/root_preferences.xml" value="0.2259963768115942" />
       </map>
     </option>
   </component>

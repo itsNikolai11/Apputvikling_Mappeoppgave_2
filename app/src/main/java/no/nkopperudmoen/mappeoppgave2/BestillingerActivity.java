@@ -1,7 +1,9 @@
 package no.nkopperudmoen.mappeoppgave2;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +55,9 @@ public class BestillingerActivity extends AppCompatActivity {
             btn.setOnClickListener(view -> {
                 //rediger-metode
             });
+            tr.setOnClickListener(view -> {
+                visBestilling(b);
+            });
             tl.addView(tr);
         }
 
@@ -63,6 +68,7 @@ public class BestillingerActivity extends AppCompatActivity {
         tl.removeAllViews();
         visBestillinger(db.hentBestillinger());
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -78,5 +84,15 @@ public class BestillingerActivity extends AppCompatActivity {
     public void nyBestilling(View view) {
         Intent i = new Intent(this, AddBestillingActivity.class);
         startActivity(i);
+    }
+
+    public void visBestilling(Bestilling b) {
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.sharedPrefs), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(getString(R.string.visBestillingID), b.get_ID());
+        editor.apply();
+        Intent i = new Intent(this, VisBestillingerActivity.class);
+        startActivity(i);
+
     }
 }

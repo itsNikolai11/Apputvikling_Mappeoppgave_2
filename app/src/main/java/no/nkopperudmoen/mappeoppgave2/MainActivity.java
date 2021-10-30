@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void visPreferanser(View view) {
+        Intent i = new Intent(this, PreferenceActivity.class);
+        startActivity(i);
     }
 
     public void visRestauranter(View view) {
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
     }
-    public void startServices(){
+
+    public void startServices() {
         Intent i = new Intent(this, PeriodiskService.class);
         startService(i);
     }

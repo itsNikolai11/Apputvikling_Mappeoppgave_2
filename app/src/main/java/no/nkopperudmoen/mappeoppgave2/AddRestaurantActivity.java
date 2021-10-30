@@ -7,11 +7,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import no.nkopperudmoen.mappeoppgave2.Fragments.ExitDialogFragment;
 import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Restaurant;
 
-public class AddRestaurantActivity extends AppCompatActivity {
+public class AddRestaurantActivity extends AppCompatActivity implements ExitDialogFragment.DialogClickListener {
     DBHandler db;
 
     @Override
@@ -41,7 +43,18 @@ public class AddRestaurantActivity extends AppCompatActivity {
         db.leggTilRestaurant(r);
         finish();
     }
-    public void cancel(View v){
+    public void cancel(View v) {
+
+        DialogFragment cancelDialog =new ExitDialogFragment();
+        cancelDialog.show(getSupportFragmentManager(), "cancelDialog");
+    }
+    @Override
+    public void onYesClick() {
         finish();
+    }
+
+    @Override
+    public void onNoClick() {
+
     }
 }

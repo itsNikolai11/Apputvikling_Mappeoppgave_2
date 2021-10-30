@@ -1,13 +1,20 @@
 package no.nkopperudmoen.mappeoppgave2.Services;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
+import android.telephony.SmsManager;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +25,7 @@ import no.nkopperudmoen.mappeoppgave2.Models.Bestilling;
 import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.R;
+import no.nkopperudmoen.mappeoppgave2.VisBestillingerActivity;
 
 public class OrdreNotifyService extends Service {
     DBHandler db;
@@ -41,13 +49,9 @@ public class OrdreNotifyService extends Service {
         }
         for (Bestilling b : alleBestillinger) {
             if (isToday(b.getTid())) {
-
                 sendLokalNotifikasjon(b);
-            } else {
-                alleBestillinger.remove(b);
             }
         }
-        //notifyKontakter(alleBestillinger);
     }
 
     public boolean isToday(Date d) {
@@ -57,8 +61,11 @@ public class OrdreNotifyService extends Service {
 
     public void sendLokalNotifikasjon(Bestilling b) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent i = new Intent(this, BestillingerActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, i, 0);
+        Intent i = new Intent(this, VisBestillingerActivity.class);
+        i.putExtra("id", b.get_ID());
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(i);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, "22")
                 .setContentTitle("Restaurantbestilling")
                 .setContentText("Bestilling på " + b.getRestaurantID())
@@ -68,21 +75,33 @@ public class OrdreNotifyService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
         notificationManager.notify(0, notification);
+        notifyKontakter(b);
     }
 
-    public void notifyKontakter(ArrayList<Bestilling> bestillinger) {
-        for (Bestilling b : bestillinger) {
-
+    public void notifyKontakter(Bestilling b) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int MY_PERMISSIONS_REQUEST_SEND_SMS = ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        int MY_PHONE_STATE_PERM = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        if (MY_PERMISSIONS_REQUEST_SEND_SMS == PackageManager.PERMISSION_GRANTED
+                && MY_PHONE_STATE_PERM == PackageManager.PERMISSION_GRANTED) {
             if (b.getVenner() == null) {
                 return;
             }
-            for (Kontakt k : b.getVenner()) {
-                sendSMS(k);
+            if (prefs.getBoolean(getString(R.string.prefSendSMS), false)) {
+                for (Kontakt k : b.getVenner()) {
+                    sendSMS(k, b);
+                }
             }
         }
     }
 
-    public void sendSMS(Kontakt k) {
-
+    public void sendSMS(Kontakt k, Bestilling b) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String msg = prefs.getString(getString(R.string.prefStandardSMS), "");
+        msg = msg.replaceAll("%restaurant%", db.hentRestaurant(b.getRestaurantID()).getNavn());
+        msg = msg.replaceAll("%fulltid%", b.getTidAsString());
+        msg = msg.replaceAll("%klokkeslett%", b.getKlokkeslett());
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(k.getTelefon(), null, msg, null, null);
     }
 }

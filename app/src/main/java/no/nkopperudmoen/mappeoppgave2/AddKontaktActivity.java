@@ -1,16 +1,20 @@
 package no.nkopperudmoen.mappeoppgave2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import no.nkopperudmoen.mappeoppgave2.Fragments.ExitDialogFragment;
 import no.nkopperudmoen.mappeoppgave2.Models.DBHandler;
 import no.nkopperudmoen.mappeoppgave2.Models.Kontakt;
 import no.nkopperudmoen.mappeoppgave2.Tools.Validator;
 
-public class AddKontaktActivity extends AppCompatActivity {
+public class AddKontaktActivity extends AppCompatActivity implements ExitDialogFragment.DialogClickListener {
     DBHandler db;
 
     @Override
@@ -40,6 +44,17 @@ public class AddKontaktActivity extends AppCompatActivity {
     }
 
     public void cancel(View v) {
+
+        DialogFragment cancelDialog =new ExitDialogFragment();
+        cancelDialog.show(getSupportFragmentManager(), "cancelDialog");
+    }
+    @Override
+    public void onYesClick() {
         finish();
+    }
+
+    @Override
+    public void onNoClick() {
+
     }
 }

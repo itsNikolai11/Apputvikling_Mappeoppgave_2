@@ -92,6 +92,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_ETTERNAVN, kontakt.getEtternavn());
         values.put(KEY_TELEFON, kontakt.getTelefon());
         db.insert(TABLE_KONTAKTER, null, values);
+        db.close();
     }
 
     public void leggTilRestaurant(Restaurant r) {
@@ -103,6 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_POSTNR, r.getPostNr());
         values.put(KEY_TYPE, r.getType());
         db.insert(TABLE_RESTAURANTER, null, values);
+        db.close();
     }
 
     public void lagreBestilling(Bestilling b) {
@@ -119,6 +121,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.insert(TABLE_ORDREVENNER, null, vennerValues);
             }
         }
+        db.close();
     }
 
     /*
@@ -139,6 +142,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 kontakter.add(k);
             } while (c.moveToNext());
         }
+        db.close();
         return kontakter;
     }
 
@@ -149,14 +153,11 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(select, null);
         if (c.moveToFirst()) {
             do {
-                Kontakt k = new Kontakt();
-                k.setFornavn(c.getString((c.getColumnIndex(KEY_FORNAVN))));
-                k.setEtternavn(c.getString((c.getColumnIndex(KEY_ETTERNAVN))));
-                k.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
-                k.set_ID(c.getLong((c.getColumnIndex(KEY_KONTAKT_ID))));
-
+                Long kontaktID = c.getLong((c.getColumnIndex(KEY_KONTAKT_ID)));
+                kontakter.add(this.hentKontakt(kontaktID));
             } while (c.moveToNext());
         }
+        db.close();
         return kontakter;
     }
 
@@ -180,6 +181,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             } while (c.moveToNext());
         }
+        db.close();
         return bestillinger;
     }
 
@@ -200,6 +202,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 restauranter.add(r);
             } while (c.moveToNext());
         }
+        db.close();
         return restauranter;
     }
 
@@ -214,6 +217,7 @@ public class DBHandler extends SQLiteOpenHelper {
             k.setEtternavn(c.getString((c.getColumnIndex(KEY_ETTERNAVN))));
             k.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
         }
+        db.close();
         return k;
     }
 
@@ -228,12 +232,27 @@ public class DBHandler extends SQLiteOpenHelper {
             r.setAdresse(c.getString((c.getColumnIndex(KEY_ADRESSE))));
             r.setTelefon(c.getString((c.getColumnIndex(KEY_TELEFON))));
         }
+        db.close();
         return r;
     }
 
-    public Bestilling hentBestilling(int id) {
+    public Bestilling hentBestilling(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return null;
+        String select = "SELECT * FROM " + TABLE_ORDRE + " WHERE " + KEY_ID + " = " + id;
+        Cursor c = db.rawQuery(select, null);
+        Bestilling b = new Bestilling();
+        if (c.moveToFirst()) {
+            b.set_ID(c.getLong((c.getColumnIndex(KEY_ID))));
+            b.setRestaurantID(c.getLong((c.getColumnIndex(KEY_RESTAURANT_ID))));
+            try {
+                b.setTid(DATE_FORMAT.parse(c.getString((c.getColumnIndex(KEY_TID)))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            b.setVenner(this.hentKontakterIBestilling(b.get_ID()));
+        }
+        db.close();
+        return b;
     }
 
     /*
@@ -246,6 +265,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_ETTERNAVN, k.getEtternavn());
         values.put(KEY_TELEFON, k.getTelefon());
         db.update(TABLE_KONTAKTER, values, KEY_ID + " =?", new String[]{String.valueOf(k.get_ID())});
+        db.close();
     }
 
     public void endreRestaurant(Restaurant r) {
@@ -257,10 +277,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_TELEFON, r.getTelefon());
         values.put(KEY_TYPE, r.getType());
         db.update(TABLE_RESTAURANTER, values, KEY_ID + " =?", new String[]{String.valueOf(r.get_ID())});
+        db.close();
     }
 
     public int endreBestilling(Bestilling b) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.close();
         return 0;
     }
 
@@ -271,21 +293,26 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         slettVennFraOrdre(id);
         db.delete(TABLE_KONTAKTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
-
+        db.close();
     }
-    public void slettVennFraOrdre(Long id){
+
+    public void slettVennFraOrdre(Long id) {
         //Dersom en venn slettes, fjern referanse fra ORDREVENNER-tabellen.
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ORDREVENNER, KEY_KONTAKT_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
+
     public void slettRestaurant(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANTER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
 
     public void slettBestilling(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ORDRE, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         db.delete(TABLE_ORDREVENNER, KEY_ORDRE_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
 }

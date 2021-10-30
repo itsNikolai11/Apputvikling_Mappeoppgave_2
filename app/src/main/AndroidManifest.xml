@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="no.nkopperudmoen.mappeoppgave2">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,16 +22,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".KontakterActivity" />
-        <activity android:name=".AddKontaktActivity" />
-        <activity android:name=".RestauranterActivity" />
-        <activity android:name=".AddRestaurantActivity" />
-        <activity android:name=".BestillingerActivity" />
-        <activity android:name=".AddBestillingActivity" />
-        <activity android:name=".ActivitySelectKontakter" />
-        <activity android:name=".EditKontaktActivity" />
-        <activity android:name=".EditRestaurantActivity" />
-        <activity android:name=".VisBestillingerActivity"/>
+        <activity android:name=".KontakterActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AddKontaktActivity"
+            android:parentActivityName=".KontakterActivity"/>
+        <activity android:name=".RestauranterActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AddRestaurantActivity"
+            android:parentActivityName=".RestauranterActivity"/>
+        <activity android:name=".BestillingerActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AddBestillingActivity"
+            android:parentActivityName=".BestillingerActivity"/>
+        <activity android:name=".ActivitySelectKontakter"
+            android:parentActivityName=".AddBestillingActivity"/>
+        <activity android:name=".EditKontaktActivity"
+            android:parentActivityName=".KontakterActivity"/>
+        <activity android:name=".EditRestaurantActivity"
+            android:parentActivityName=".RestauranterActivity"/>
+        <activity android:name=".VisBestillingerActivity"
+            android:parentActivityName=".BestillingerActivity"/>
+        <activity android:name=".PreferenceActivity"
+            android:parentActivityName=".MainActivity"/>
 
         <service android:name=".Services.OrdreNotifyService" />
         <service android:name=".Services.PeriodiskService" />
@@ -44,7 +58,6 @@
         </receiver>
 
     </application>
-
 
 
 </manifest>
